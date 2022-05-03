@@ -19,7 +19,7 @@
 				<div class="container">
 					<div class="row">
 						<div>
-							<header; line-height: 1.2>
+							<header>
 								<h1><strong>Gimme, Gimme, Gimme</strong> (An Analysis of ABBA)</h1>
 							</header>
                             
@@ -34,18 +34,107 @@
 							</p>
 						</div>
 					</div>
+
+					
+					<h2>Rating Breakdown</h2>
+				
+					<iframe src="ScoreBreakdown.html" width="1000" height="600"></iframe>
+	
+					<p>As you can see I generally think ABBA is pretty good. The average score was 2.93, corresponds
+						to just below an A. A was also the most common score with 34 of the 112 songs. There was only
+						one song I gave an E, but I think it deserves it.
+					</p>
+
+					<h2>Average Score and Total Plays by Year</h2>
+
+					<iframe src="mean_score.html" width="1000" height="600"></iframe>
+
+					
+
+					<p>
+						This isn't incredibly surprising, but it looks like ABBA was at it's best 
+						in the late seventiees and early eighties. Additionally, their return album in
+						2021 was pretty good score wise, but not nearly as popular as their early songs.
+					</p>
+
+					
+					<p>
+						Their best year according to score was 1978. However, that was only a single song that 
+						I happened to like, so it's not the best conclusion to draw.  
+					</p>
+
+
+
+					<h2>Popularity</h2>
+
+					<p>
+						I was curious to see how my tastes aligned with the broader public's. To do this I 
+						plotted my scores vs spotify plays. 
+					</p>
+
+					<iframe src="score_vs_popularity.html" width="1000" height="600"></iframe>
+
+
+					<p>
+						This didn't reveal any relationship to me, so I decided to plot my scores 
+						vs the log10 popularity of each song. Basically, we're going to be looking at 
+						how many zeros are in the number rather than the actual number itself.
+					</p>
+
+					<iframe src="score_vs_log_popularity.html" width="1000" height="600"></iframe>
+
+					<p>
+						No things are a little clearer. It seems like their is a relationship between
+						the number of zeros in the spotify plays and how high I rated the song. This make
+						sense, the better the song is, the more people will want to listen to it. 
+					</p>
+
+					<p>
+						My next question was, where did I and the public, as defined by spotify plays, most 
+						disagree. To do this I performed a linear regression, a technique that tries to find a 
+						simple line that describes the data as best as possible. I then found how far each of
+						the songs was away from this line. If a song was above this line, I called it underrated,
+						because I thought it was better than the number of listens it had idicated. If it was 
+						below the line, I called it overrated, because it was played more times than it should be.
+						The result of this is the following plot.
+					</p>
+
+					<iframe src="ratedness.html" width="1000" height="600"></iframe>
+
+					<p>
+						The purple line is what was recovered. Interesting the line's slope is almost one 
+						to one between the score and the number of 0's in the spotify plays. A song with 10,000 listens
+						would theoretically be 0. And a score with 1,000,000,000 listens would be a 5. The exact formula
+						for the line is:
+					</p>
+
+					<h5>
+						Score = 1.01 * log(popularity) - 4.15
+					</h5>
+
+					<p>
+						The most overrated song was "When I Kissed the Teacher," which I did not like at all. 
+					</p>
+					
+					<p>
+						The most underrated
+						song was "The Day Before You Came," which I had never heard of before but liked a lot for it's 
+						strong imagery. 
+					</p>
+
+					<h2>
+						Data
+					</h2>
+
+					<p>
+						You can download all of the data, including the over- and under-ratedness by clicking here: 
+						<a href="ABBA Data.csv">Data</a>
+					</p>
+
 				</div>
 
-                <h1>Ratings</h1>
-                <p>You can find how I rated all of ABBA's song here: 
-                    <a href="https://docs.google.com/spreadsheets/d/17E5ErPVtBSU06JUyw_6t1Dzt3A9UQPJzFb4C2DB5odY/edit?usp=sharing">Link to Ratings</a>
-                
-                </p>
-                <h2>Rating Breakdown</h2>
-        
-                <p>Here is the total number of songs by rating.</p>
-                <div w3-include-html="ScoreBreakdown.html"></div>
-                <include src="ScoreBreakdown.html"></include>
+				
+              
 			</article>
 
 
