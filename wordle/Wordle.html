@@ -1,0 +1,138 @@
+<html>
+
+<head>
+	<title>Worlde Solver</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="../assets/css/main.css" />
+	<link rel="stylesheet"
+		href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body class="is-preload">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul class="container">
+			<a href="../index.html">Home</a>
+		</ul>
+	</nav>
+
+	<!-- Home -->
+	<article id="Intro" class="wrapper style1">
+		<div class="container">
+			<div class="row">
+				<div>
+					<header>
+						<h1><strong>A Wordle Solver</strong></h1>
+					</header>
+
+					<h2>Introduction</h2>
+					<p>
+						I probably don't need to tell you what Worlde is, but I will anyways. Wordle is a
+						daily word game where you have six tries to guess an unknown five letter word. When
+						you make a guess, each letter's tile will turn one of three colors, where each color has
+						its own meaning. If a letter is highlighted in grey, it means it is not in the word.
+						If it turns yellow, it means it is in the word, but not at the spot, and if its green it
+						is in the word and in the correct position. If you haven't tried it yet, it's pretty fun
+						and this will make more sense. So here's a link: <a
+							href="https://www.nytimes.com/games/wordle/index.html">wordle</a>
+					</p>
+
+					<p>
+						Now that you've tried it, we can move on to what I've been doing. I was talking to
+						my family one night, and they said making a solver would be easy. I insisted that
+						it would be a lot harder than they thought. But when they left, I went ahead and gave
+						it a shot, and it actually wasn't that hard. So they were right. Thanks for the idea too!
+					</p>
+
+					<p>
+						So here I will explain how my solver works and share some of the insights into the game that
+						I've gathered from running a few thousand simulations with it. So without any further preamble,
+						let's begin.
+					</p>
+
+					<h2>
+						The Solver
+					</h2>
+
+					<p>
+						The solver works by eliminating words that don't match what it knows is true, and then finding
+						a new guess by scoring each of the possible remaining words and choosing one, and then repeating
+						this process until it arrives at the right answer.
+					</p>
+
+					<h3>
+						Eliminating Wrong Answers
+					</h3>
+
+					<p>
+						There are four steps that my solver uses to eliminate all words that can't be the answer.
+
+
+
+						<li><strong>Removing words that aren't in the solution</strong></li>
+						For example, if we have a grey T, we remove all words that have T's in them.
+
+						<li><strong>Only keeping the words with letters that must be in the solution</strong></li>
+						If we have a yellow or green letter, we ignore all words that don't have those letters in them.
+
+
+						<li><strong>Removing words with letters in the same position as yellow tiles</strong></li>
+						If we have a yellow A in the first spot, we remove all words that have A in that first spot as
+						well.
+						This way we will always learn something new.
+
+						<li><strong>Only keeping words with the same letters in green tiles</strong></li>
+						If the word ends in g, we remove all words that also end in g.
+
+					</p>
+
+				</div>
+			</div>
+
+
+
+
+
+	</article>
+
+
+
+
+
+	<!-- Contact -->
+	<article id="contact" class="wrapper style4">
+		<div class="container medium">
+			<div class="col-12">
+				<hr />
+				<h3>Find me on ...</h3>
+				<ul class="social">
+					<li><a href="https://www.linkedin.com/in/spencer-peterson-uofu/"
+							class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+					<li><a href="https://github.com/u0927156" class="icon brands fa-github"><span
+								class="label">Github</span></a></li>
+				</ul>
+				<hr />
+			</div>
+		</div>
+		<footer>
+			<ul id="copyright">
+				<li>&copy; Spencer Peterson. All rights reserved.</li>
+				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+			</ul>
+		</footer>
+		</div>
+	</article>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+
+</body>
+
+</html>
