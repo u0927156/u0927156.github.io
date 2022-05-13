@@ -91,8 +91,8 @@ video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 100%;
-	font: inherit;
+	font-size: 18px;
+
 	vertical-align: baseline;
 }
 
@@ -275,12 +275,13 @@ h6 {
 }
 
 h1 {
-	font-size: 3.25em;
 	letter-spacing: -0.025em;
 	font-weight: 300;
+	font-size: 2.25em;
 }
 
 h1 strong {
+	font-size: 1.25em;
 	font-weight: 700;
 }
 
@@ -318,6 +319,7 @@ ol,
 dl,
 table {
 	margin-bottom: 2em;
+	text-align: left;
 }
 
 header {
@@ -1890,6 +1892,7 @@ ul.social {
 	margin: 0;
 	list-style: none;
 	padding-left: 0;
+	text-align: center;
 }
 
 ul.social li {
@@ -2550,7 +2553,7 @@ body>article {
 	}
 
 	#top p {
-		font-size: 1em;
+		font-size: 1.25em;
 	}
 
 	#contact footer {
@@ -2575,5 +2578,7 @@ body>article {
 	#copyright li:first-child {
 		margin-top: 0;
 	}
+
+
 
 }
