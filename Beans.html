@@ -184,6 +184,37 @@
 
 					<iframe src="/Figures/pca3d_whiten.html" width="100%" height="600"></iframe>
 
+					<p>
+						They look very similar to what we have above. But if you look at the axes, you can see
+						that they are much smaller. Instead of going to several thousand, they only go from -1 to 7.
+						This makes it much easier for the neural network to train on this data and also helps separate
+						the clouds in higher dimensions.
+					</p>
+
+					<h2>
+						Conclusion
+					</h2>
+
+					<p>
+						My neural network was able to achieve an accuracy of 96%. This is slightly higher than what was
+						previously reported in the paper. I was able to achieve this result using PCA and whitening to
+						preprocess the data. K-mean clustering was not able to very reliably cluster these beans by
+						type.
+					</p>
+
+					<h2>Sources</h2>
+
+					<p>
+						The data and original bean paper was written by Murat Koklu and Ilker Ali Ozkan. The paper
+						was titled <i>Multiclass classification of dry beans using computer vision and machine learning
+							techniques</i> and can be found <a
+							href="https://www.sciencedirect.com/science/article/abs/pii/S0168169919311573?via%3Dihub">here</a>
+					</p>
+
+					<p>
+						The data can be found at the UCI machine learning repository <a
+							href="https://archive.ics.uci.edu/ml/datasets/Dry+Bean+Dataset">here</a>.
+					</p>
 				</div>
 			</div>
 		</div>
