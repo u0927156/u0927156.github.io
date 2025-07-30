@@ -1,3 +1,7 @@
+import "../../main.css";
+import LinkedInIcon from "../../assets/LinkedIn_icon.svg";
+import GithubIcon from "../../assets/github-mark.svg";
+
 export default function Footer() {
   return (
     <>
@@ -8,19 +12,21 @@ export default function Footer() {
             <h3>Find me on ...</h3>
             <ul class="social">
               <li>
-                <a
-                  href="https://www.linkedin.com/in/spencer-peterson-uofu/"
-                  class="icon brands fa-linkedin-in"
-                >
-                  <span class="label">LinkedIn</span>
+                <a href="https://www.linkedin.com/in/spencer-peterson-uofu/">
+                  <img
+                    src={LinkedInIcon}
+                    height="50"
+                    alt="Link to my LinkedIn"
+                  ></img>
                 </a>
               </li>
               <li>
-                <a
-                  href="https://github.com/u0927156"
-                  class="icon brands fa-github"
-                >
-                  <span class="label">Github</span>
+                <a href="https://github.com/u0927156">
+                  <img
+                    src={GithubIcon}
+                    height="50"
+                    alt="Link to my Github"
+                  ></img>
                 </a>
               </li>
             </ul>

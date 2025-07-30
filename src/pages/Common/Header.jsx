@@ -6,9 +6,6 @@ export default function Header() {
         <li>
           <a href="./">Home</a>
         </li>
-        <li>
-          <a href="./Abba">Abba</a>
-        </li>
       </ul>
     </nav>
   );

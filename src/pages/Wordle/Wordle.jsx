@@ -1,0 +1,349 @@
+import Footer from "../Common/Footer";
+import Header from "../Common/Header";
+import PlotlyChart from "../Common/PlotlyChart";
+import "./wordle.css";
+
+export default function Wordle() {
+  return (
+    <>
+      <Header />
+      <article id="Intro" class="wrapper style1">
+        <div className="container">
+          <div class="row">
+            <div>
+              <header>
+                <h1>
+                  <strong>A Wordle Solver</strong>
+                </h1>
+              </header>
+
+              <h2>Introduction</h2>
+              <p>
+                I probably don't need to tell you what Wordle is, but I will
+                anyways. Wordle is a daily word game where you have six tries to
+                guess an unknown five letter word. When you make a guess, each
+                letter's tile will turn one of three colors, where each color
+                has its own meaning. If a letter is highlighted in grey, it
+                means it is not in the word. If it turns yellow, it means it is
+                in the word, but not at the spot, and if its green it is in the
+                word and in the correct position. If you haven't tried it yet,
+                it's pretty fun and this will make more sense. So here's a link:{" "}
+                <a href="https://www.nytimes.com/games/wordle/index.html">
+                  Wordle
+                </a>
+              </p>
+
+              <p>
+                Now that you've tried it, we can move on to what I've been
+                doing. I was talking to my family one night, and they said
+                making a solver would be easy. I insisted that it would be a lot
+                harder than they thought. But when they left, I went ahead and
+                gave it a shot, and it actually wasn't that hard. So they were
+                right. Thanks for the idea too!
+              </p>
+
+              <p>
+                So here I will explain how my solver works and share some of the
+                insights into the game that I've gathered from running a few
+                thousand simulations with it. So without any further preamble,
+                let's begin.
+              </p>
+
+              <h2>The Solver</h2>
+
+              <p>
+                The solver works by eliminating words that don't match what it
+                knows is true, and then finding a new guess by scoring each of
+                the possible remaining words and choosing one, and then
+                repeating this process until it arrives at the right answer.
+              </p>
+
+              <h3>Eliminating Wrong Answers</h3>
+
+              <p>
+                There are four steps that my solver uses to eliminate all words
+                that can't be the answer.
+                <ol>
+                  <li>
+                    <strong>Removing words that aren't in the solution</strong>
+                  </li>
+                  For example, if we have a grey T, we remove all words that
+                  have T's in them.
+                  <li>
+                    <strong>
+                      Only keeping the words with letters that must be in the
+                      solution
+                    </strong>
+                  </li>
+                  For example, if we have a yellow or green letter, we ignore
+                  all words that don't have those letters in them.
+                  <li>
+                    <strong>
+                      Remove words that don't have letters in the right place.
+                    </strong>
+                  </li>
+                  For example, if a word ends in G and is yellow, we remove all
+                  words that also have G in that same position.
+                  <li>
+                    <strong>
+                      Removing words with letters in the same position as yellow
+                      tiles
+                    </strong>
+                  </li>
+                  For example, if we have a yellow A in the first spot, we
+                  remove all words that have A in that first spot as well. This
+                  way we will always learn something new.
+                </ol>
+              </p>
+            </div>
+          </div>
+
+          <p>
+            If all of that was Wordle salad to you, don't worry. We're going to
+            go through an example. Let's say the solution is:
+          </p>
+
+          <div class="wordle-grid">
+            <div class="wordle-row">
+              <div class="green cell">M</div>
+              <div class="green cell">A</div>
+              <div class="green cell">P</div>
+              <div class="green cell">L</div>
+              <div class="green cell">E</div>
+            </div>
+          </div>
+
+          <p>
+            Of course, we don't know that at the beginning. Let's use my typical
+            starting word, irate to start out with. We would get this:
+          </p>
+
+          <div class="wordle-grid">
+            <div class="wordle-row">
+              <div class="gray cell">I</div>
+              <div class="gray cell">R</div>
+              <div class="yellow cell">A</div>
+              <div class="gray cell">T</div>
+              <div class="green cell">E</div>
+            </div>
+          </div>
+
+          <p>
+            Right now, before any analysis, we have 12947 words to choose from.
+            It's pretty unlikely to make a good guess now. You would only have a
+            0.00077 percent chance of guessing correctly. So let's start by
+            filtering out some of those words. The first thing we do is get rid
+            of words that contain letters that were in gray. So words like
+          </p>
+
+          <div class="wordle-grid">
+            <div class="wordle-row">
+              <div class="wrong gray cell">R</div>
+              <div class="yellow cell">E</div>
+              <div class="yellow cell">A</div>
+              <div class="gray cell">D</div>
+              <div class="gray cell">S</div>
+            </div>
+          </div>
+          <div class="wordle-grid">
+            <div class="wordle-row">
+              <div class="wrong gray cell">T</div>
+              <div class="wrong gray cell">R</div>
+              <div class="yellow cell">A</div>
+              <div class="wrong gray cell">I</div>
+              <div class="gray cell">N</div>
+            </div>
+          </div>
+          <div class="wordle-grid">
+            <div class="wordle-row">
+              <div class="wrong gray cell">I</div>
+              <div class="gray cell">N</div>
+              <div class="wrong gray cell">T</div>
+              <div class="yellow cell">E</div>
+              <div class="wrong gray cell">R</div>
+            </div>
+          </div>
+
+          <p>
+            are now going to be removed because they all contain letters that we
+            know are not in the correct solution. After removing these words we
+            are left with 6429 words. We now have a 0.012 percent chance of
+            guessing. Which is a lot better, but still very bad.
+          </p>
+
+          <p>
+            Now, let's focus on getting rid of words that don't have A and E. We
+            would remove words like
+          </p>
+
+          <div class="wordle-grid">
+            <div class="wordle-row">
+              <div class="gray cell">B</div>
+              <div class="gray cell">O</div>
+              <div class="gray cell">U</div>
+              <div class="gray cell">N</div>
+              <div class="gray cell">D</div>
+            </div>
+          </div>
+
+          <div class="wordle-grid">
+            <div class="wordle-row">
+              <div class="gray cell">F</div>
+              <div class="gray cell">I</div>
+              <div class="gray cell">Z</div>
+              <div class="gray cell">Z</div>
+              <div class="gray cell">Y</div>
+            </div>
+          </div>
+
+          <p>
+            Because they don't contain any of the words that we know should be
+            in our answer. That takes us all the way down to 1067 words. We have
+            a 0.094 percent chance of guessing the word correctly now. That's
+            pretty good, but we can do better. We know our word has an A, but
+            that the A is not in the middle position. So we remove words like
+          </p>
+
+          <div class="wordle-grid">
+            <div class="wordle-row">
+              <div class="gray cell">C</div>
+              <div class="gray cell">L</div>
+              <div class="wrong yellow cell">A</div>
+              <div class="yellow cell">M</div>
+              <div class="yellow cell">P</div>
+            </div>
+          </div>
+
+          <p>
+            because we already know the A is not in the center. Doing this
+            allows us to eliminate some extra words.
+          </p>
+
+          <p>
+            So let's throw out all the words that don't have E at the end. After
+            doing that, we only have 814 words left. We're now at a whopping
+            0.12 percent chance of guessing the right word.
+          </p>
+
+          <p>For our last step, we know our final word will look like this:</p>
+
+          <div class="wordle-grid">
+            <div class="wordle-row">
+              <div class="green cell">?</div>
+              <div class="green cell">?</div>
+              <div class="green cell">?</div>
+              <div class="green cell">?</div>
+              <div class="green cell">E</div>
+            </div>
+          </div>
+
+          <p>
+            So we can remove all words that don't end in E. That takes us down
+            to only 184 words to guess from. That's a 0.5 percent chance of
+            guessing the right answer. That's not easy but it's a lot better
+            than having way too many 0's.
+          </p>
+
+          <h3>Choosing the next guess</h3>
+
+          <p>
+            So now we have 184 words to choose from. We could choose a random
+            word, but we can do better than that. We want to find a word that
+            eliminates the largest number of words possible. So we need to
+            determine how much information each word would give us. But we also
+            will penalize words that have the same letter twice, because that
+            means we don't learn as much. This penalization makes sure we learn
+            the most at every step.
+          </p>
+
+          <iframe
+            src="/Figures/wordle_letter_score.html"
+            width="100%"
+            height="600"
+          ></iframe>
+
+          <p>
+            Each letter has a score now, as you can see A and E are highest
+            because they are in every word left in this list. But L and S are
+            also very high scorers. So we can now take each of the remaining
+            words and score each of them.
+          </p>
+
+          <p>
+            Using these scores, the solver says the top five words are anole,
+            alone, salve, angle, and sable, with scores of 539, 539, 536, 536,
+            and 535 respectively. Now is a good time to note that while there
+            are 12,947 words we can guess from, only about 2,500 are actually
+            Wordle answers. Most of the chosen words are words that people
+            actually know. So we can safely ignore anole. So let's chose alone.
+          </p>
+
+          <div class="wordle-grid">
+            <div class="wordle-row">
+              <div class="yellow cell">A</div>
+              <div class="yellow cell">L</div>
+              <div class="gray cell">O</div>
+              <div class="gray cell">N</div>
+              <div class="green cell">E</div>
+            </div>
+          </div>
+
+          <p>
+            This process is repeated until we get to the end. The full result
+            for this game would look like:
+          </p>
+
+          <div class="wordle-grid">
+            <div class="wordle-row">
+              <div class="gray cell">I</div>
+              <div class="gray cell">R</div>
+              <div class="yellow cell">A</div>
+              <div class="gray cell">T</div>
+              <div class="green cell">E</div>
+            </div>
+            <div class="wordle-row">
+              <div class="yellow cell">A</div>
+              <div class="yellow cell">L</div>
+              <div class="gray cell">O</div>
+              <div class="gray cell">N</div>
+              <div class="green cell">E</div>
+            </div>
+            <div class="wordle-row">
+              <div class="gray cell">S</div>
+              <div class="green cell">A</div>
+              <div class="yellow cell">L</div>
+              <div class="gray cell">V</div>
+              <div class="green cell">E</div>
+            </div>
+            <div class="wordle-row">
+              <div class="gray cell">P</div>
+              <div class="green cell">A</div>
+              <div class="gray cell">G</div>
+              <div class="green cell">L</div>
+              <div class="green cell">E</div>
+            </div>
+            <div class="wordle-row">
+              <div class="green cell">M</div>
+              <div class="green cell">A</div>
+              <div class="green cell">P</div>
+              <div class="green cell">L</div>
+              <div class="green cell">E</div>
+            </div>
+          </div>
+
+          <p>
+            It's not a very good game, but it did solve it. So that's how a
+            Wordle solver works!
+          </p>
+
+          <div>
+            If you want to try it out, the github repository is here:{" "}
+            <a href="https://github.com/u0927156/WordleSolver">repo</a>
+          </div>
+        </div>
+      </article>
+
+      <Footer />
+    </>
+  );
+}

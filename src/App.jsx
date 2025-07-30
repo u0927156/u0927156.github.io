@@ -13,24 +13,35 @@ function Profile() {
   return (
     <>
       <article id="top" className="wrapper style1">
-        <div display="flex">
-          <div className="flex items-center">
-            <div className="image fit height:auto; width:32.3333%; padding-right:2em">
-              <img src={profilePicture} height={500} alt="" />
+        <div className="container">
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            {/* <div style={{ flex: 1, flexDirection: "row" }}> */}
+            <div
+              className="image fit"
+              style={{
+                width: "32.3333%",
+                paddingRight: "2em",
+                aspectRatio: 1,
+              }}
+            >
+              <img src={profilePicture} height={400} alt="" />
             </div>
-            <div className="width:66.6667%">
+            <div style={{ width: "66.6667%", flex: 2 }}>
               <header>
                 <h1>
                   Hello. I'm <strong>Spencer Peterson</strong>.
                 </h1>
               </header>
               <p>
-                I'm a Biomedical Engineer and Data Scientist. I've worked as the
-                CTO of Aether Masks, a student company that raised more than
-                thirty thousand dollars. I have also worked as a data science
-                intern at Recursion Pharmaceuticals. However, this is a space to
-                show my personal projects, so feel free to take a look around.
+                I'm a Data Scientist with expertise in the healthcare industry.
+                My experience includes working at Recursion Pharmaceuticals and
+                BioFire Diagnostics. I also was the CTO of Aether Masks, a
+                student company that raised more than thirty thousand dollars.
+                This is a space to show my personal projects, so feel free to
+                take a look around. I'm interested in using Python, SQL, and
+                data visualization tools to help people and their health.
               </p>
+              {/* </div> */}
             </div>
           </div>
         </div>
