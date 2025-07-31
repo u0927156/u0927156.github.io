@@ -7,6 +7,7 @@ import Abba from "./pages/Abba/Abba.jsx";
 import Wordle from "./pages/Wordle/Wordle.jsx";
 import Beans from "./pages/Beans/Beans.jsx";
 import Names from "./pages/Names/Names.jsx";
+import Dbscan from "./pages/Dbscan/Dbscan.jsx";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
   { path: "/wordle", element: <Wordle /> },
   { path: "/beans", element: <Beans /> },
   { path: "/names", element: <Names /> },
+  { path: "/dbscan", element: <Dbscan /> },
 ]);
 
 createRoot(document.getElementById("root")).render(
