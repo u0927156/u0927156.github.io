@@ -6,6 +6,7 @@ import profilePicture from "./assets/IMG-0918.jpg";
 import beansPicture from "./assets/shelley-pauls-beans-resized.jpg";
 import abbaPicture from "./assets/ABBA.png";
 import wordlePicture from "./assets/words_padded.png";
+import namePicture from "./assets/spencer_plot.png";
 import Header from "./pages/Common/Header";
 import Footer from "./pages/Common/Footer";
 
@@ -89,6 +90,18 @@ function PortfolioLinks() {
         </header>
 
         <div class="row">
+          <PortfolioBox
+            image={namePicture}
+            imageTitle={
+              "A plot showing an estimation of birth year based on name."
+            }
+            imageAlt={
+              "A plot showing an estimation of birth year based on name."
+            }
+            portfolioLink={"./names"}
+            projectTitle={"Guessing Your Age with Just Your Name."}
+            projectDesc={"I can guess how old you are just based on your name."}
+          />
           <PortfolioBox
             image={abbaPicture}
             imageTitle={
